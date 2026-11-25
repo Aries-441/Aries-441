@@ -1,20 +1,29 @@
-### About
+![Aries-441 · EVA Unit-02 · Agent Runtime & Sandbox Infrastructure](assets/eva-unit-02.webp)
 
-Graduate researcher at **IIE, CAS** (B.Eng. in Information Security, **SJTU**).  
-Currently focused on **Agent Runtime & Sandbox Infrastructure** (MicroVMs, `virtiofs`/FUSE filesystem semantics, storage volume lifecycle) and **Automated Security Evaluation**.
+## ![Pilot profile](assets/eva-pilot-profile.webp)
 
-- **Blog & Engineering Notes:** [aries441.tech](https://aries441.tech)
-- **Focus Areas:** Agent Sandboxes · Linux VFS / FUSE · Distributed Control Planes · Access Control Auditing
+> `AFFILIATION`  Graduate researcher at **IIE, CAS** · B.Eng. in Information Security, **SJTU**
+>
+> `FOCUS`  Agent runtimes · MicroVM sandboxes · Linux VFS/FUSE · storage volume lifecycles · automated security evaluation
+>
+> `BLOG`  [aries441.tech ↗](https://aries441.tech/)
 
----
+## ![Mission log](assets/eva-mission-log.webp)
 
-### Selected Open-Source & Security Work
+### [CubeSandbox](https://github.com/TencentCloud/CubeSandbox) · Agent sandbox infrastructure
 
-- **[TencentCloud/CubeSandbox](https://github.com/TencentCloud/CubeSandbox)** *(RustVMM + KVM MicroVM Sandbox for AI Agents)*
-  - **Volume-level Object Storage Binding** ([#2136](https://github.com/TencentCloud/CubeSandbox/pull/2136), [#2201](https://github.com/TencentCloud/CubeSandbox/pull/2201)): Implemented stateless `private_data` plumbing across CubeAPI, CubeMaster, storage plugins, and Go/Python/Node.js SDKs with credential-referenced S3/COS bucket & prefix isolation.
-  - **virtiofsd Filesystem Semantics Fix** ([#2002](https://github.com/TencentCloud/CubeSandbox/pull/2002), [#2036](https://github.com/TencentCloud/CubeSandbox/pull/2036)): Eliminated unexpected `s3fs` file truncation caused by redundant `open/close` in `xattr` paths by switching to `O_PATH` descriptors via `/proc/self/fd` with per-worker `unshare(CLONE_FS)` isolation.
-  - **Control-Plane Stability** ([#2236](https://github.com/TencentCloud/CubeSandbox/pull/2236), [#1988](https://github.com/TencentCloud/CubeSandbox/pull/1988)): Fixed 4-byte UTF-8 MySQL session charset failures (`utf8mb4`) and stale sandbox route HTTP 500 error mapping.
-- **Jenkins Security Advisory** ([CVE-2026-53438 / SECURITY-3712](https://www.jenkins.io/security/advisory/2026-06-10/))
-  - Identified and reported an incomplete authorization check in Jenkins queue cancellation endpoints allowing cross-item cancellation without `Item/Read` permission.
+- **Object storage volumes** · [#2136](https://github.com/TencentCloud/CubeSandbox/pull/2136) · [#2201](https://github.com/TencentCloud/CubeSandbox/pull/2201)\
+  Implemented per-volume `private_data` across the API, control plane, storage plugins, and Go/Python/Node.js SDKs for credential-referenced S3/COS bucket and prefix isolation. Added end-to-end lifecycle coverage.
+- **virtiofsd / FUSE** · [#2002](https://github.com/TencentCloud/CubeSandbox/pull/2002) · [#2036](https://github.com/TencentCloud/CubeSandbox/pull/2036)\
+  Fixed an `s3fs` truncation regression triggered by `xattr` operations. Reused `O_PATH` descriptors via `/proc/self/fd` and isolated each worker’s filesystem context with `unshare(CLONE_FS)`.
+- **Control-plane reliability** · [#2236](https://github.com/TencentCloud/CubeSandbox/pull/2236) · [#1988](https://github.com/TencentCloud/CubeSandbox/pull/1988)\
+  Enabled `utf8mb4` negotiation for MySQL connections and corrected stale sandbox-route responses from HTTP 500 to 404.
 
----
+### Jenkins · Security research
+
+Independently reported a missing `Item/Read` permission check in Jenkins queue cancellation. [CVE-2026-53438 / SECURITY-3712](https://www.jenkins.io/security/advisory/2026-06-10/)
+
+## ![Field notes](assets/eva-field-notes.webp)
+
+- **VFS / FUSE** · [一次 xattr 操作如何破坏文件截断语义？](https://aries441.tech/posts/tech-notes/virtiofsd-xattr-truncate/)
+- **CPython runtime** · [为什么主线程退出后，ThreadPoolExecutor 的 `submit()` 会报 `interpreter shutdown`？](https://aries441.tech/posts/tech-notes/python-threadpoolexecutor-interpreter-shutdown/)
