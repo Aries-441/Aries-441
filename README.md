@@ -1,4 +1,4 @@
-![Aries-441 · EVA Unit-02 · Agent Runtime & Sandbox Infrastructure](assets/eva-unit-02.webp)
+![Aries-441 · EVA Terminal · Agent Runtime & Sandbox Infrastructure](assets/eva-terminal.webp)
 
 ## ![Pilot profile](assets/eva-pilot-profile.webp)
 
